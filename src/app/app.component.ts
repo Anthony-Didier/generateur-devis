@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
@@ -8,6 +9,28 @@ import autoTable from 'jspdf-autotable';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  createForm: FormGroup;
+
+  isNextDisabled = true;
+
+  constructor(private formBuilder: FormBuilder) { }
+
+  ngOnInit() {
+    this.createForm = this.formBuilder.group({
+      date: ['', Validators.required],
+      number: ['', Validators.required],
+      place: ['', Validators.required],
+      time: ['', Validators.required],
+      name: ['', Validators.required],
+      service: ['', Validators.required],
+      po: ['', Validators.required]
+    })
+
+    this.createForm.valueChanges.subscribe((v) => {
+      this.isNextDisabled = !this.createForm.valid;
+    });
+  }
 
   public downloadInvoice() {
 
@@ -23,7 +46,7 @@ export class AppComponent {
     let number = (<HTMLInputElement>document.getElementById("number")).value;
     let place = (<HTMLInputElement>document.getElementById("place")).value;
     let time = (<HTMLInputElement>document.getElementById("time")).value;
-    let prestation = (<HTMLInputElement>document.getElementById("prestation")).value;
+    let prestation = (<HTMLSelectElement>document.getElementById("prestation")).value;
     let name = (<HTMLInputElement>document.getElementById("name")).value;
     let service = (<HTMLInputElement>document.getElementById("service")).value;
     let po = (<HTMLInputElement>document.getElementById("po")).value;
@@ -291,10 +314,17 @@ export class AppComponent {
     // });
 
     return doc.save("invoice");
-
   }
 
-  ngOnInit(): void {
+  public checkPrestation() {
+    let prestation = (<HTMLSelectElement>document.getElementById("prestation")).value;
+    let message = (<HTMLSpanElement>document.getElementById("popup"));
 
+    if (prestation === "none") {
+      message.hidden = false
+    } else {
+      message.hidden = true
+      this.downloadInvoice()
+    }
   }
 }

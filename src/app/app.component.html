@@ -1,43 +1,64 @@
-<form>
-  <!-- <div>
-    <label for="id">N° de devis : </label>
-    <input type="text" id="idInput" disabled />
-  </div> -->
-  <div>
-    <label for="date">Date de prestation : </label>
-    <input type="date" id="date" required />
-  </div>
-  <div>
-    <label for="number">Nombre de convives : </label>
-    <input type="number" id="number" required />
-  </div>
-  <div>
-    <label for="place">Lieu : </label>
-    <input type="text" id="place" required />
-  </div>
-  <div>
-    <label for="time">Heure : </label>
-    <input type="time" id="time" required />
-  </div>
-  <div>
-    <label for="prestation">Prestation : </label>
-    <input type="text" id="prestation" required />
-  </div>
-  <div>
-    <label for="name">Nom du client : </label>
-    <input type="text" id="name" required />
-  </div>
-  <div>
-    <label for="service">Service du client : </label>
-    <input type="text" id="service" required />
-  </div>
-  <div>
-    <label for="po">P.O. : </label>
-    <input type="text" id="po" required />
-  </div>
-  <div>
-    <label for="email">Adresse e-mail du client : </label>
-    <input type="email" id="email" required />
-  </div>
-</form>
-<button (click)="downloadInvoice()">Télécharger le devis</button>
+<body>
+  <h1>Générateur de devis</h1>
+  <p id="explication">
+    Grâce à cet outil, vous pouvez générer un devis au format .pdf et l'envoyer
+    directement au client.
+  </p>
+  <form [formGroup]="createForm">
+    <div class="fields">
+      <label for="date">Date de prestation : </label>
+      <input type="date" id="date" formControlName="date" />
+    </div>
+    <div class="fields">
+      <label for="number">Nombre de convives : </label>
+      <input type="number" id="number" formControlName="number" />
+    </div>
+    <div class="fields">
+      <label for="place">Lieu : </label>
+      <input type="text" id="place" formControlName="place" />
+    </div>
+    <div class="fields">
+      <label for="time">Heure : </label>
+      <input type="time" id="time" formControlName="time" />
+    </div>
+    <div class="fields">
+      <label for="prestation">Prestation : </label>
+      <!-- <input type="text" id="prestation" required /> -->
+      <select name="prestation" id="prestation" required>
+        <option selected="true" value="none" disabled="disabled">
+          -- Choisir une prestation --
+        </option>
+        <option>Pause café</option>
+        <option>Pause après-midi</option>
+        <option>Petit déjeuner</option>
+        <option>Cocktail</option>
+        <option>Buffet</option>
+        <option>Plateau repas</option>
+      </select>
+    </div>
+    <div class="fields">
+      <label for="name">Nom du client : </label>
+      <input type="text" id="name" formControlName="name" />
+    </div>
+    <div class="fields">
+      <label for="service">Service du client : </label>
+      <input type="text" id="service" formControlName="service" />
+    </div>
+    <div class="fields">
+      <label for="po">P.O. : </label>
+      <input type="text" id="po" formControlName="po" />
+    </div>
+    <div class="fields">
+      <label for="email">Adresse e-mail du client : </label>
+      <input type="email" id="email" />
+    </div>
+  </form>
+  <button
+    id="download"
+    (click)="checkPrestation()"
+    [disabled]="createForm.invalid || isNextDisabled"
+  >
+    Télécharger le devis
+  </button>
+  <span id="popup" hidden="true">Veuillez sélectionner une prestation</span>
+</body>
