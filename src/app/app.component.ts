@@ -14,6 +14,13 @@ export class AppComponent {
 
   isNextDisabled = true;
 
+  selectedProducts: any;
+  filteredProducts: any;
+  products = [
+    { name: "Jus d'orange (1 l)", tax: 10, price: 2.09 },
+    { name: "Cidre (75 cl)", tax: 20, price: 2.50 },
+  ];
+
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -30,6 +37,12 @@ export class AppComponent {
     this.createForm.valueChanges.subscribe((v) => {
       this.isNextDisabled = !this.createForm.valid;
     });
+  }
+
+  public onProductsSelected() {
+    console.log(this.selectedProducts);
+    this.filteredProducts = this.products.filter(t => t.name == this.selectedProducts);
+    (<HTMLDivElement>document.getElementById("selection")).hidden = false
   }
 
   public downloadInvoice() {
@@ -324,6 +337,18 @@ export class AppComponent {
       message.hidden = false
     } else {
       message.hidden = true
+      this.downloadInvoice()
+    }
+  }
+
+  public checkProducts() {
+    let produit = (<HTMLSelectElement>document.getElementById("product")).value;
+    let message2 = (<HTMLSpanElement>document.getElementById("popup2"));
+
+    if (produit === "undefined") {
+      message2.hidden = false
+    } else {
+      message2.hidden = true
       this.downloadInvoice()
     }
   }
