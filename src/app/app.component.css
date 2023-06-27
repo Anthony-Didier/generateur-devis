@@ -30,6 +30,14 @@ select {
   font-family: Roboto;
 }
 
+table,
+th,
+td {
+  border-collapse: collapse;
+  border: 1px solid black;
+  padding: 8px;
+}
+
 button {
   overflow: hidden;
   border-width: 0;

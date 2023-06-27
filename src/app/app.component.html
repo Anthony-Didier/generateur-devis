@@ -48,14 +48,26 @@
         <option selected="true" [ngValue]="undefined" disabled="disabled">
           -- Choisir un produit --
         </option>
-        <option *ngFor="let product of products" [ngValue]="product.name">
+        <option *ngFor="let product of products" [ngValue]="product">
           {{ product.name + " " + product.price + " €" }}
         </option>
       </select>
     </div>
     <div class="fields" id="selection" hidden="true">
-      Produits sélectionnés: {{ selectedProducts }}
+      Produits sélectionnés: {{ selectedProductsName }}
     </div>
+    <table id="selectionTable" hidden="true">
+      <tr>
+        <th>Désignation</th>
+        <th>TVA</th>
+        <th>Prix HT</th>
+      </tr>
+      <tr>
+        <td>{{ selectedProductsName }}</td>
+        <td>{{ selectedProductsTax }} %</td>
+        <td>{{ selectedProductsPrice }} €</td>
+      </tr>
+    </table>
     <div class="fields">
       <label for="name">Nom du client : </label>
       <input type="text" id="name" formControlName="name" />

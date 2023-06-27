@@ -14,12 +14,16 @@ export class AppComponent {
 
   isNextDisabled = true;
 
-  selectedProducts: any;
-  filteredProducts: any;
   products = [
-    { name: "Jus d'orange (1 l)", tax: 10, price: 2.09 },
-    { name: "Cidre (75 cl)", tax: 20, price: 2.50 },
+    { "name": "Jus d'orange (1 l)", "tax": 10, "price": 2.09 },
+    { "name": "Cidre (75 cl)", "tax": 20, "price": 2.50 },
   ];
+
+  selectedProducts: any;
+  selectedProductsName: any;
+  selectedProductsTax: any;
+  selectedProductsPrice: any;
+  filteredProducts: any;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -41,8 +45,12 @@ export class AppComponent {
 
   public onProductsSelected() {
     console.log(this.selectedProducts);
-    this.filteredProducts = this.products.filter(t => t.name == this.selectedProducts);
-    (<HTMLDivElement>document.getElementById("selection")).hidden = false
+    this.filteredProducts = this.products.filter(t => t.tax == this.selectedProducts);
+    this.selectedProductsName = this.selectedProducts.name;
+    this.selectedProductsTax = this.selectedProducts.tax;
+    this.selectedProductsPrice = this.selectedProducts.price.toFixed(2);
+    (<HTMLDivElement>document.getElementById("selection")).hidden = false;
+    (<HTMLTableElement>document.getElementById("selectionTable")).hidden = false;
   }
 
   public downloadInvoice() {
@@ -199,9 +207,9 @@ export class AppComponent {
     });
 
     autoTable(doc, {
-      head: [['Désignation', 'Commentaires', 'Prix unitaire HT', 'Quantité', 'TVA', 'Total HT']],
+      head: [['Désignation', 'Commentaires', 'P.U HT', 'Quantité', 'TVA', 'Total HT']],
       body: [
-        ['Product or service name', 'Category', '$450', '2', '10 %', '$1000'],
+        [this.selectedProductsName, 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...', this.selectedProductsPrice + ' €', '2', this.selectedProductsTax + ' %', (this.selectedProductsPrice * 2).toFixed(2) + " €"],
         ['Product or service name', 'Category', '$450', '2', '10 %', '$1000'],
         ['Product or service name', 'Category', '$450', '2', '10 %', '$1000'],
         ['Product or service name', 'Category', '$450', '2', '20 %', '$1000']
@@ -209,6 +217,32 @@ export class AppComponent {
       theme: 'striped',
       headStyles: {
         fillColor: '#343a40'
+      },
+      columnStyles: {
+        0: {
+          valign: "middle"
+        },
+        1: {
+          cellWidth: 80,
+          halign: "center",
+          valign: "middle"
+        },
+        2: {
+          halign: "center",
+          valign: "middle"
+        },
+        3: {
+          halign: "center",
+          valign: "middle"
+        },
+        4: {
+          halign: "center",
+          valign: "middle"
+        },
+        5: {
+          halign: "center",
+          valign: "middle"
+        }
       }
     });
 
@@ -216,7 +250,7 @@ export class AppComponent {
       body: [
         [
           {
-            content: 'Subtotal:',
+            content: 'Total HT:',
             styles: {
               halign: 'right'
             }
@@ -230,7 +264,7 @@ export class AppComponent {
         ],
         [
           {
-            content: 'Total tax:',
+            content: 'Total TVA 10 %:',
             styles: {
               halign: 'right'
             }
@@ -244,7 +278,21 @@ export class AppComponent {
         ],
         [
           {
-            content: 'Total amount:',
+            content: 'Total TVA 20 %:',
+            styles: {
+              halign: 'right'
+            }
+          },
+          {
+            content: '$400',
+            styles: {
+              halign: 'right'
+            }
+          },
+        ],
+        [
+          {
+            content: 'Total TTC:',
             styles: {
               halign: 'right'
             }
