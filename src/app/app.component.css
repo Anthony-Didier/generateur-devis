@@ -21,7 +21,8 @@ input {
   font-family: Roboto;
 }
 
-input#number {
+input#number,
+#quantity {
   width: 70px;
 }
 
@@ -36,6 +37,11 @@ td {
   border-collapse: collapse;
   border: 1px solid black;
   padding: 8px;
+  margin-top: 10px;
+}
+
+textarea#comment {
+  width: 500px;
 }
 
 button {

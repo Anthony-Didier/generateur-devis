@@ -25,6 +25,8 @@ export class AppComponent {
   selectedProductsPrice: any;
   filteredProducts: any;
 
+  qte: any;
+
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -35,7 +37,8 @@ export class AppComponent {
       time: ['', Validators.required],
       name: ['', Validators.required],
       service: ['', Validators.required],
-      po: ['', Validators.required]
+      po: ['', Validators.required],
+      quantity: ['', Validators.required],
     })
 
     this.createForm.valueChanges.subscribe((v) => {
@@ -45,16 +48,22 @@ export class AppComponent {
 
   public onProductsSelected() {
     console.log(this.selectedProducts);
+    (<HTMLInputElement>document.getElementById("quantity")).value = "1";
     this.filteredProducts = this.products.filter(t => t.tax == this.selectedProducts);
     this.selectedProductsName = this.selectedProducts.name;
     this.selectedProductsTax = this.selectedProducts.tax;
     this.selectedProductsPrice = this.selectedProducts.price.toFixed(2);
+    (<HTMLTableCellElement>document.getElementById("totalHT")).innerHTML = this.selectedProducts.price.toFixed(2) + " €";
     (<HTMLDivElement>document.getElementById("selection")).hidden = false;
     (<HTMLTableElement>document.getElementById("selectionTable")).hidden = false;
+    (<HTMLTableElement>document.getElementById("totalTable")).hidden = false;
+  }
+
+  public onQuantityChange() {
+    (<HTMLTableCellElement>document.getElementById("totalHT")).innerHTML = (this.selectedProductsPrice * this.qte).toFixed(2) + " €";
   }
 
   public downloadInvoice() {
-
     const date = new Date();
 
     let day = date.getDate();
@@ -71,6 +80,8 @@ export class AppComponent {
     let name = (<HTMLInputElement>document.getElementById("name")).value;
     let service = (<HTMLInputElement>document.getElementById("service")).value;
     let po = (<HTMLInputElement>document.getElementById("po")).value;
+    let comment = (<HTMLInputElement>document.getElementById("comment")).value;
+    let quantity = (<HTMLInputElement>document.getElementById("quantity")).value;
 
     var doc = new jsPDF();
     let img = new Image();
@@ -209,7 +220,7 @@ export class AppComponent {
     autoTable(doc, {
       head: [['Désignation', 'Commentaires', 'P.U HT', 'Quantité', 'TVA', 'Total HT']],
       body: [
-        [this.selectedProductsName, 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...', this.selectedProductsPrice + ' €', '2', this.selectedProductsTax + ' %', (this.selectedProductsPrice * 2).toFixed(2) + " €"],
+        [this.selectedProductsName, comment, this.selectedProductsPrice + ' €', quantity, this.selectedProductsTax + ' %', (this.selectedProductsPrice * parseInt(quantity)).toFixed(2) + " €"],
         ['Product or service name', 'Category', '$450', '2', '10 %', '$1000'],
         ['Product or service name', 'Category', '$450', '2', '10 %', '$1000'],
         ['Product or service name', 'Category', '$450', '2', '20 %', '$1000']
@@ -224,7 +235,8 @@ export class AppComponent {
         },
         1: {
           cellWidth: 80,
-          halign: "center",
+          fontSize: 9,
+          fontStyle: "italic",
           valign: "middle"
         },
         2: {
