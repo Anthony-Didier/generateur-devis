@@ -27,6 +27,8 @@ export class AppComponent {
 
   qte: any;
 
+  commentaire: any;
+
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -47,7 +49,7 @@ export class AppComponent {
   }
 
   public onProductsSelected() {
-    console.log(this.selectedProducts);
+    // console.log(this.selectedProducts);
     (<HTMLInputElement>document.getElementById("quantity")).value = "1";
     this.filteredProducts = this.products.filter(t => t.tax == this.selectedProducts);
     this.selectedProductsName = this.selectedProducts.name;
@@ -57,10 +59,84 @@ export class AppComponent {
     (<HTMLDivElement>document.getElementById("selection")).hidden = false;
     (<HTMLTableElement>document.getElementById("selectionTable")).hidden = false;
     (<HTMLTableElement>document.getElementById("totalTable")).hidden = false;
+
+    let table = (<HTMLTableElement>document.getElementById("selectionTable"));
+    table.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
+
+    let rowCount = table.rows.length;
+    let row = table.insertRow(rowCount);
+    row.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
+
+    let cell1 = row.insertCell(0);
+    cell1.innerHTML = this.selectedProductsName;
+    cell1.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
+
+    let cell2 = row.insertCell(1);
+    let element1 = document.createElement("textarea");
+    element1.id = "comment";
+    element1.style.cssText = "width: 500px;";
+    cell2.appendChild(element1);
+    cell2.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
+    element1.addEventListener("change", function onCommentChange() {
+      console.log(element1.value)
+    })
+    this.commentaire = element1.value;
+
+    let cell3 = row.insertCell(2);
+    cell3.innerHTML = this.selectedProductsPrice + " €";
+    cell3.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
+
+    let cell4 = row.insertCell(3);
+    let element2 = document.createElement("input");
+    let totalCellPrice = parseFloat(this.selectedProductsPrice).toFixed(2);
+    element2.type = "number";
+    element2.setAttribute("ng-model", "qte");
+    element2.addEventListener("change", function onQuantityChange() {
+      cell6.innerHTML = (((parseFloat(totalCellPrice)) * (parseInt(element2.value))).toFixed(2)).toString() + " €";
+    })
+    element2.addEventListener("keypress", (event) => {
+      event.preventDefault();
+    });
+    element2.addEventListener('keydown', (e) => {
+      if (e.keyCode === 8 || e.keyCode === 46) {
+        e.preventDefault();
+      }
+      return false;
+    })
+    element2.style.cssText = "width: 70px;";
+    element2.id = "quantity"
+    element2.min = "1"
+    element2.setAttribute("oninput", "'this.value = !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : null'");
+    element2.setAttribute("form-control-name", "quantity");
+    element2.value = "1";
+    cell4.appendChild(element2);
+    cell4.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
+
+    let cell5 = row.insertCell(4);
+    cell5.innerHTML = this.selectedProductsTax + " %";
+    cell5.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
+
+    let cell6 = row.insertCell(5);
+    cell6.innerHTML = this.selectedProducts.price.toFixed(2) + " €"
+    cell6.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
+
+    let cell7 = row.insertCell(6);
+    cell7.innerHTML = "";
+    cell7.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
+
+    let productsList: any[] = []
+
+    productsList.push({ "name": this.selectedProductsName, "comment": this.commentaire, "tax": this.selectedProductsTax, "price": this.selectedProductsPrice })
+
+    console.log(productsList)
   }
 
-  public onQuantityChange() {
-    (<HTMLTableCellElement>document.getElementById("totalHT")).innerHTML = (this.selectedProductsPrice * this.qte).toFixed(2) + " €";
+  public addProducts() {
+    let productsList: any[] = []
+
+    productsList.push({ "name": this.selectedProductsName, "comment": this.commentaire, "tax": this.selectedProductsTax, "price": this.selectedProductsPrice })
+
+    console.log(productsList)
   }
 
   public downloadInvoice() {
@@ -220,10 +296,7 @@ export class AppComponent {
     autoTable(doc, {
       head: [['Désignation', 'Commentaires', 'P.U HT', 'Quantité', 'TVA', 'Total HT']],
       body: [
-        [this.selectedProductsName, comment, this.selectedProductsPrice + ' €', quantity, this.selectedProductsTax + ' %', (this.selectedProductsPrice * parseInt(quantity)).toFixed(2) + " €"],
-        ['Product or service name', 'Category', '$450', '2', '10 %', '$1000'],
-        ['Product or service name', 'Category', '$450', '2', '10 %', '$1000'],
-        ['Product or service name', 'Category', '$450', '2', '20 %', '$1000']
+        [this.selectedProductsName, comment, this.selectedProductsPrice + ' €', quantity, this.selectedProductsTax + ' %', (this.selectedProductsPrice * parseInt(quantity)).toFixed(2) + " €"]
       ],
       theme: 'striped',
       headStyles: {

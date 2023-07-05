@@ -63,7 +63,7 @@
     <div class="fields" id="selection" hidden="true">
       Produits sélectionnés: {{ selectedProductsName }}
     </div>
-    <table id="selectionTable" hidden="true">
+    <table id="selectionTable" hidden="true" border="1">
       <tr>
         <th>Désignation</th>
         <th>Commentaire</th>
@@ -73,7 +73,7 @@
         <th>Total HT</th>
         <th>Actions</th>
       </tr>
-      <tr>
+      <tr hidden="true">
         <td>{{ selectedProductsName }}</td>
         <td><textarea id="comment"></textarea></td>
         <td>{{ selectedProductsPrice }} €</td>
@@ -81,7 +81,6 @@
           <input
             type="number"
             [(ngModel)]="qte"
-            (ngModelChange)="onQuantityChange()"
             id="quantity"
             min="1"
             oninput="this.value = 
@@ -135,6 +134,9 @@
     [disabled]="createForm.invalid || isNextDisabled"
   >
     Télécharger le devis
+  </button>
+  <button id="addProducts" (click)="addProducts()">
+    Vérifier liste produits
   </button>
   <span id="popup" hidden="true">Veuillez sélectionner une prestation</span>
   <span id="popup2" hidden="true"
