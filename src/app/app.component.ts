@@ -15,19 +15,26 @@ export class AppComponent {
   isNextDisabled = true;
 
   products = [
-    { "name": "Jus d'orange (1 l)", "tax": 10, "price": 2.09 },
-    { "name": "Cidre (75 cl)", "tax": 20, "price": 2.50 },
+    { "name": "Jus d'orange (1 l)", "comment": "", "price": 2.09, "quantity": 1, "tax": 10, "totalHT": 2.09 },
+    { "name": "Cidre (75 cl)", "comment": "", "price": 2.50, "quantity": 1, "tax": 20, "totalHT": 2.50 },
   ];
 
-  selectedProducts: any;
-  selectedProductsName: any;
-  selectedProductsTax: any;
-  selectedProductsPrice: any;
-  filteredProducts: any;
+  public static selectedProducts: any;
+  public static selectedProductsName: any;
+  public static selectedProductsComment: any;
+  public static selectedProductsPrice: any;
+  public static selectedProductsQuantity: any;
+  public static selectedProductsTax: any;
+  public static selectedProductsTotalHT: any;
+  public static filteredProducts: any;
+
+  public classReference = AppComponent;
 
   qte: any;
 
   commentaire: any;
+
+  public static productsList: any[] = [];
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -40,7 +47,6 @@ export class AppComponent {
       name: ['', Validators.required],
       service: ['', Validators.required],
       po: ['', Validators.required],
-      quantity: ['', Validators.required],
     })
 
     this.createForm.valueChanges.subscribe((v) => {
@@ -51,14 +57,21 @@ export class AppComponent {
   public onProductsSelected() {
     // console.log(this.selectedProducts);
     (<HTMLInputElement>document.getElementById("quantity")).value = "1";
-    this.filteredProducts = this.products.filter(t => t.tax == this.selectedProducts);
-    this.selectedProductsName = this.selectedProducts.name;
-    this.selectedProductsTax = this.selectedProducts.tax;
-    this.selectedProductsPrice = this.selectedProducts.price.toFixed(2);
-    (<HTMLTableCellElement>document.getElementById("totalHT")).innerHTML = this.selectedProducts.price.toFixed(2) + " €";
+    AppComponent.filteredProducts = this.products.filter(t => t.tax == AppComponent.selectedProducts);
+    AppComponent.selectedProductsName = AppComponent.selectedProducts.name;
+    AppComponent.selectedProductsComment = AppComponent.selectedProducts.comment;
+    AppComponent.selectedProductsPrice = AppComponent.selectedProducts.price.toFixed(2);
+    AppComponent.selectedProductsQuantity = AppComponent.selectedProducts.quantity;
+    AppComponent.selectedProductsTax = AppComponent.selectedProducts.tax;
+    AppComponent.selectedProductsTotalHT = AppComponent.selectedProducts.totalHT.toFixed(2);
+    (<HTMLTableCellElement>document.getElementById("totalHT")).innerHTML = AppComponent.selectedProducts.totalHT.toFixed(2) + " €";
     (<HTMLDivElement>document.getElementById("selection")).hidden = false;
     (<HTMLTableElement>document.getElementById("selectionTable")).hidden = false;
     (<HTMLTableElement>document.getElementById("totalTable")).hidden = false;
+
+    AppComponent.productsList.push({ name: AppComponent.selectedProductsName, comment: "", price: AppComponent.selectedProductsPrice, quantity: 1, tax: AppComponent.selectedProductsTax, totalHT: 0 })
+
+    // console.log(AppComponent.productsList)
 
     let table = (<HTMLTableElement>document.getElementById("selectionTable"));
     table.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
@@ -68,7 +81,7 @@ export class AppComponent {
     row.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
 
     let cell1 = row.insertCell(0);
-    cell1.innerHTML = this.selectedProductsName;
+    cell1.innerHTML = AppComponent.selectedProductsName;
     cell1.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
 
     let cell2 = row.insertCell(1);
@@ -78,21 +91,27 @@ export class AppComponent {
     cell2.appendChild(element1);
     cell2.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
     element1.addEventListener("change", function onCommentChange() {
-      console.log(element1.value)
+      // console.log(element1.value)
+      AppComponent.productsList[(row.rowIndex) - 2].comment = element1.value
     })
-    this.commentaire = element1.value;
 
     let cell3 = row.insertCell(2);
-    cell3.innerHTML = this.selectedProductsPrice + " €";
+    cell3.innerHTML = AppComponent.selectedProductsPrice + " €";
     cell3.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
 
     let cell4 = row.insertCell(3);
     let element2 = document.createElement("input");
-    let totalCellPrice = parseFloat(this.selectedProductsPrice).toFixed(2);
     element2.type = "number";
     element2.setAttribute("ng-model", "qte");
     element2.addEventListener("change", function onQuantityChange() {
-      cell6.innerHTML = (((parseFloat(totalCellPrice)) * (parseInt(element2.value))).toFixed(2)).toString() + " €";
+      // console.log(element2.value)
+      // AppComponent.selectedProductsQuantity = element2.value;
+      // console.log(AppComponent.productsList[(row.rowIndex) - 2].name);
+      AppComponent.productsList[(row.rowIndex) - 2].quantity = element2.value
+      AppComponent.productsList[(row.rowIndex) - 2].totalHT = (AppComponent.productsList[(row.rowIndex) - 2].price * parseInt(element2.value)).toFixed(2);
+      cell6.innerHTML = AppComponent.productsList[(row.rowIndex) - 2].totalHT + " €"
+      // console.log("Quantité : " + AppComponent.selectedProductsQuantity);
+      console.log(AppComponent.productsList[(row.rowIndex) - 2]);
     })
     element2.addEventListener("keypress", (event) => {
       event.preventDefault();
@@ -113,37 +132,35 @@ export class AppComponent {
     cell4.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
 
     let cell5 = row.insertCell(4);
-    cell5.innerHTML = this.selectedProductsTax + " %";
+    cell5.innerHTML = AppComponent.selectedProductsTax + " %";
     cell5.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
 
     let cell6 = row.insertCell(5);
-    cell6.innerHTML = this.selectedProducts.price.toFixed(2) + " €"
+    cell6.innerHTML = AppComponent.selectedProducts.totalHT.toFixed(2) + " €"
     cell6.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
 
     let cell7 = row.insertCell(6);
     cell7.innerHTML = "";
     cell7.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
 
-    let productsList: any[] = []
-
-    productsList.push({ "name": this.selectedProductsName, "comment": this.commentaire, "tax": this.selectedProductsTax, "price": this.selectedProductsPrice })
-
-    console.log(productsList)
+    // AppComponent.selectedProductsComment = AppComponent.selectedProducts.comment;
   }
 
-  public addProducts() {
-    let productsList: any[] = []
-
-    productsList.push({ "name": this.selectedProductsName, "comment": this.commentaire, "tax": this.selectedProductsTax, "price": this.selectedProductsPrice })
-
-    console.log(productsList)
-  }
+  // public addProducts() {
+  //   // console.log(AppComponent.commentaires)
+  //   this.productsList.forEach((elem, i) => {
+  //     // elem.comment = AppComponent.commentaires[i]
+  //     // elem.quantity = AppComponent.quantites[i]
+  //     // elem.totalHT = AppComponent.totauxHT[i]
+  //   })
+  //   console.log(this.productsList)
+  // }
 
   public downloadInvoice() {
     const date = new Date();
 
-    let day = date.getDate();
-    let month = ("0" + (date.getMonth() + 1)).slice(-2)
+    let day = ("0" + date.getDate()).slice(-2);
+    let month = ("0" + (date.getMonth() + 1)).slice(-2);
     let year = date.getFullYear();
 
     let currentDate = `${day}/${month}/${year}`;
@@ -156,8 +173,6 @@ export class AppComponent {
     let name = (<HTMLInputElement>document.getElementById("name")).value;
     let service = (<HTMLInputElement>document.getElementById("service")).value;
     let po = (<HTMLInputElement>document.getElementById("po")).value;
-    let comment = (<HTMLInputElement>document.getElementById("comment")).value;
-    let quantity = (<HTMLInputElement>document.getElementById("quantity")).value;
 
     var doc = new jsPDF();
     let img = new Image();
@@ -293,38 +308,58 @@ export class AppComponent {
       theme: 'plain'
     });
 
+    let info: any[][] = [];
+    let infoTotalHT = 0;
+    let infoTotalTVA10 = 0;
+    let infoTotalTVA20 = 0;
+    let infoTotalTTC = 0;
+
+    AppComponent.productsList.forEach((element, index, array) => {
+      info.push([element.name, element.comment, element.price + " €", element.quantity, element.tax + " %", element.totalHT + " €"])
+      infoTotalHT += parseFloat(element.totalHT);
+      if (element.tax == 10) {
+        infoTotalTVA10 += (element.totalHT * 0.1)
+      } else if (element.tax == 20) {
+        infoTotalTVA20 += (element.totalHT * 0.2)
+      }
+      infoTotalTTC = infoTotalHT + infoTotalTVA10 + infoTotalTVA20
+    });
+
     autoTable(doc, {
-      head: [['Désignation', 'Commentaires', 'P.U HT', 'Quantité', 'TVA', 'Total HT']],
-      body: [
-        [this.selectedProductsName, comment, this.selectedProductsPrice + ' €', quantity, this.selectedProductsTax + ' %', (this.selectedProductsPrice * parseInt(quantity)).toFixed(2) + " €"]
-      ],
+      head: [['Désignation', 'Commentaires', 'P.U. HT', 'Qté', 'TVA', 'Total HT']],
+      body: info,
       theme: 'striped',
       headStyles: {
         fillColor: '#343a40'
       },
       columnStyles: {
         0: {
+          fontSize: 10,
           valign: "middle"
         },
         1: {
           cellWidth: 80,
-          fontSize: 9,
+          fontSize: 8,
           fontStyle: "italic",
           valign: "middle"
         },
         2: {
+          fontSize: 10,
           halign: "center",
           valign: "middle"
         },
         3: {
+          fontSize: 10,
           halign: "center",
           valign: "middle"
         },
         4: {
+          fontSize: 10,
           halign: "center",
           valign: "middle"
         },
         5: {
+          fontSize: 10,
           halign: "center",
           valign: "middle"
         }
@@ -337,11 +372,12 @@ export class AppComponent {
           {
             content: 'Total HT:',
             styles: {
-              halign: 'right'
+              halign: 'right',
+              fontStyle: 'bold'
             }
           },
           {
-            content: '$3600',
+            content: infoTotalHT.toFixed(2) + " €",
             styles: {
               halign: 'right'
             }
@@ -351,11 +387,12 @@ export class AppComponent {
           {
             content: 'Total TVA 10 %:',
             styles: {
-              halign: 'right'
+              halign: 'right',
+              fontStyle: 'bold'
             }
           },
           {
-            content: '$400',
+            content: infoTotalTVA10.toFixed(2) + " €",
             styles: {
               halign: 'right'
             }
@@ -365,11 +402,12 @@ export class AppComponent {
           {
             content: 'Total TVA 20 %:',
             styles: {
-              halign: 'right'
+              halign: 'right',
+              fontStyle: 'bold'
             }
           },
           {
-            content: '$400',
+            content: infoTotalTVA20.toFixed(2) + " €",
             styles: {
               halign: 'right'
             }
@@ -379,13 +417,15 @@ export class AppComponent {
           {
             content: 'Total TTC:',
             styles: {
-              halign: 'right'
+              halign: 'right',
+              fontStyle: 'bold'
             }
           },
           {
-            content: '$4000',
+            content: infoTotalTTC.toFixed(2) + " €",
             styles: {
-              halign: 'right'
+              halign: 'right',
+              fontStyle: 'bold'
             }
           },
         ],

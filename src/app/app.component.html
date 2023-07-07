@@ -46,7 +46,7 @@
     <div class="fields">
       <label for="product">Produit : </label>
       <select
-        [(ngModel)]="selectedProducts"
+        [(ngModel)]="classReference.selectedProducts"
         name="product"
         id="product"
         [ngModelOptions]="{ standalone: true }"
@@ -61,7 +61,7 @@
       </select>
     </div>
     <div class="fields" id="selection" hidden="true">
-      Produits sélectionnés: {{ selectedProductsName }}
+      Produits sélectionnés: {{ classReference.selectedProductsName }}
     </div>
     <table id="selectionTable" hidden="true" border="1">
       <tr>
@@ -74,11 +74,11 @@
         <th>Actions</th>
       </tr>
       <tr hidden="true">
-        <td>{{ selectedProductsName }}</td>
+        <td>{{ classReference.selectedProductsName }}</td>
         <td><textarea id="comment"></textarea></td>
-        <td>{{ selectedProductsPrice }} €</td>
+        <td>{{ classReference.selectedProductsPrice }} €</td>
         <td>
-          <input
+          <!-- <input
             type="number"
             [(ngModel)]="qte"
             id="quantity"
@@ -86,9 +86,16 @@
             oninput="this.value = 
           !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : null"
             formControlName="quantity"
+          /> -->
+          <input
+            type="number"
+            id="quantity"
+            min="1"
+            oninput="this.value = 
+          !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : null"
           />
         </td>
-        <td>{{ selectedProductsTax }} %</td>
+        <td>{{ classReference.selectedProductsTax }} %</td>
         <td id="totalHT"></td>
         <td></td>
       </tr>
@@ -130,14 +137,14 @@
   </form>
   <button
     id="download"
-    (click)="checkPrestation()"
+    (click)="downloadInvoice()"
     [disabled]="createForm.invalid || isNextDisabled"
   >
     Télécharger le devis
   </button>
-  <button id="addProducts" (click)="addProducts()">
+  <!-- <button id="addProducts" (click)="addProducts()">
     Vérifier liste produits
-  </button>
+  </button> -->
   <span id="popup" hidden="true">Veuillez sélectionner une prestation</span>
   <span id="popup2" hidden="true"
     >Veuillez sélectionner au moins un produit</span
