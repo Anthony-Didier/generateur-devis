@@ -62,7 +62,33 @@ button:hover {
   transition: 0.7s;
 }
 
-#popup {
+#popup,
+#popup2 {
   font-weight: bold;
   color: red;
+}
+
+.btn-delete {
+  font-size: 16px;
+  color: red;
+
+  > .mdi-delete-empty {
+    display: none;
+  }
+
+  &:hover {
+    background-color: lighten(red, 48%);
+
+    > .mdi-delete-empty {
+      display: block;
+    }
+
+    > .mdi-delete {
+      display: none;
+    }
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 4px lighten(red, 40%);
+  }
 }

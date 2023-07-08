@@ -17,6 +17,93 @@ export class AppComponent {
   products = [
     { "name": "Jus d'orange (1 l)", "comment": "", "price": 2.09, "quantity": 1, "tax": 10, "totalHT": 2.09 },
     { "name": "Cidre (75 cl)", "comment": "", "price": 2.50, "quantity": 1, "tax": 20, "totalHT": 2.50 },
+    { "name": "Eau gazeuse grande", "comment": "", "price": 1.70, "quantity": 1, "tax": 10, "totalHT": 1.70 },
+    { "name": "Eau gazeuse (33 cl)", "comment": "", "price": 0.85, "quantity": 1, "tax": 10, "totalHT": 0.85 },
+    { "name": "Jus d'orange frais", "comment": "", "price": 3.14, "quantity": 1, "tax": 10, "totalHT": 3.14 },
+    { "name": "Cristaline (1,5 l)", "comment": "", "price": 1.19, "quantity": 1, "tax": 10, "totalHT": 1.19 },
+    { "name": "Cristaline (50 cl)", "comment": "", "price": 0.26, "quantity": 1, "tax": 10, "totalHT": 0.26 },
+    { "name": "Oasis (2 l)", "comment": "", "price": 3.50, "quantity": 1, "tax": 10, "totalHT": 3.50 },
+    { "name": "Pepsi (1,25 l)", "comment": "", "price": 3.00, "quantity": 1, "tax": 10, "totalHT": 3.00 },
+    { "name": "Eau (50 cl)", "comment": "", "price": 0.26, "quantity": 1, "tax": 10, "totalHT": 0.26 },
+    { "name": "Champagne", "comment": "", "price": 25.00, "quantity": 1, "tax": 20, "totalHT": 25.00 },
+    { "name": "Thé", "comment": "", "price": 2.05, "quantity": 1, "tax": 10, "totalHT": 2.05 },
+    { "name": "Café filtre", "comment": "", "price": 3.79, "quantity": 1, "tax": 10, "totalHT": 3.79 },
+    { "name": "Bière Desperados", "comment": "", "price": 2.10, "quantity": 1, "tax": 20, "totalHT": 2.10 },
+    { "name": "Bière Affligem", "comment": "", "price": 2.00, "quantity": 1, "tax": 20, "totalHT": 2.00 },
+    { "name": "Dourthe - Rouge", "comment": "", "price": 13.00, "quantity": 1, "tax": 20, "totalHT": 13.00 },
+    { "name": "Dourthe - Rosé", "comment": "", "price": 12.00, "quantity": 1, "tax": 20, "totalHT": 12.00 },
+    { "name": "Salade composée", "comment": "", "price": 30.00, "quantity": 1, "tax": 10, "totalHT": 30.00 },
+    { "name": "Plateau de fromage", "comment": "", "price": 2.70, "quantity": 1, "tax": 10, "totalHT": 2.70 },
+    { "name": "Plateau de charcuterie", "comment": "", "price": 2.50, "quantity": 1, "tax": 10, "totalHT": 2.50 },
+    { "name": "Corbeille de fruits", "comment": "", "price": 2.50, "quantity": 1, "tax": 10, "totalHT": 2.50 },
+    { "name": "Mini wrap", "comment": "", "price": 0.57, "quantity": 1, "tax": 10, "totalHT": 0.57 },
+    { "name": "Mini sandwich", "comment": "", "price": 1.00, "quantity": 1, "tax": 10, "totalHT": 1.00 },
+    { "name": "Petit four sucré", "comment": "", "price": 0.77, "quantity": 1, "tax": 10, "totalHT": 0.77 },
+    { "name": "Petit four salé", "comment": "", "price": 0.77, "quantity": 1, "tax": 10, "totalHT": 0.77 },
+    { "name": "Pain et beurre", "comment": "", "price": 0.60, "quantity": 1, "tax": 10, "totalHT": 0.60 },
+    { "name": "Personnel", "comment": "", "price": 14.00, "quantity": 1, "tax": 10, "totalHT": 14.00 },
+    { "name": "Gâteaux secs", "comment": "", "price": 0.50, "quantity": 1, "tax": 10, "totalHT": 0.50 },
+    { "name": "Mini viennoiseries", "comment": "", "price": 1.02, "quantity": 1, "tax": 10, "totalHT": 1.02 },
+    { "name": "Madeleines", "comment": "", "price": 0.80, "quantity": 1, "tax": 10, "totalHT": 0.80 },
+    { "name": "Mini beignet", "comment": "", "price": 0.36, "quantity": 1, "tax": 10, "totalHT": 0.36 },
+    { "name": "Macaron", "comment": "", "price": 0.80, "quantity": 1, "tax": 10, "totalHT": 0.80 },
+    { "name": "Mini cannelés", "comment": "", "price": 0.34, "quantity": 1, "tax": 10, "totalHT": 0.34 },
+    { "name": "Gros cannelés", "comment": "", "price": 1.00, "quantity": 1, "tax": 10, "totalHT": 1.00 },
+    { "name": "Mini clafoutis", "comment": "", "price": 0.97, "quantity": 1, "tax": 10, "totalHT": 0.97 },
+    { "name": "Bouchon châtaigne", "comment": "", "price": 0.54, "quantity": 1, "tax": 10, "totalHT": 0.54 },
+    { "name": "Mini muffin", "comment": "", "price": 0.80, "quantity": 1, "tax": 10, "totalHT": 0.80 },
+    { "name": "Kit couverts", "comment": "", "price": 0.18, "quantity": 1, "tax": 10, "totalHT": 0.18 },
+    { "name": "Gobelets, serviettes, etc", "comment": "", "price": 7.00, "quantity": 1, "tax": 10, "totalHT": 7.00 },
+  ];
+
+  boissons20 = [
+    { "name": "Cidre (75 cl)", "comment": "", "price": 2.50, "quantity": 1, "tax": 20, "totalHT": 2.50 },
+    { "name": "Champagne", "comment": "", "price": 25.00, "quantity": 1, "tax": 20, "totalHT": 25.00 },
+    { "name": "Bière Desperados", "comment": "", "price": 2.10, "quantity": 1, "tax": 20, "totalHT": 2.10 },
+    { "name": "Bière Affligem", "comment": "", "price": 2.00, "quantity": 1, "tax": 20, "totalHT": 2.00 },
+    { "name": "Dourthe - Rouge", "comment": "", "price": 13.00, "quantity": 1, "tax": 20, "totalHT": 13.00 },
+    { "name": "Dourthe - Rosé", "comment": "", "price": 12.00, "quantity": 1, "tax": 20, "totalHT": 12.00 },
+  ];
+  boissons10 = [
+    { "name": "Jus d'orange (1 l)", "comment": "", "price": 2.09, "quantity": 1, "tax": 10, "totalHT": 2.09 },
+    { "name": "Eau gazeuse grande", "comment": "", "price": 1.70, "quantity": 1, "tax": 10, "totalHT": 1.70 },
+    { "name": "Eau gazeuse (33 cl)", "comment": "", "price": 0.85, "quantity": 1, "tax": 10, "totalHT": 0.85 },
+    { "name": "Jus d'orange frais", "comment": "", "price": 3.14, "quantity": 1, "tax": 10, "totalHT": 3.14 },
+    { "name": "Cristaline (1,5 l)", "comment": "", "price": 1.19, "quantity": 1, "tax": 10, "totalHT": 1.19 },
+    { "name": "Cristaline (50 cl)", "comment": "", "price": 0.26, "quantity": 1, "tax": 10, "totalHT": 0.26 },
+    { "name": "Oasis (2 l)", "comment": "", "price": 3.50, "quantity": 1, "tax": 10, "totalHT": 3.50 },
+    { "name": "Pepsi (1,25 l)", "comment": "", "price": 3.00, "quantity": 1, "tax": 10, "totalHT": 3.00 },
+    { "name": "Eau (50 cl)", "comment": "", "price": 0.26, "quantity": 1, "tax": 10, "totalHT": 0.26 },
+    { "name": "Thé", "comment": "", "price": 2.05, "quantity": 1, "tax": 10, "totalHT": 2.05 },
+  ];
+  produitsPetitDejeuner = [
+    { "name": "Café filtre", "comment": "", "price": 3.79, "quantity": 1, "tax": 10, "totalHT": 3.79 },
+    { "name": "Gâteaux secs", "comment": "", "price": 0.50, "quantity": 1, "tax": 10, "totalHT": 0.50 },
+    { "name": "Mini viennoiseries", "comment": "", "price": 1.02, "quantity": 1, "tax": 10, "totalHT": 1.02 },
+    { "name": "Madeleines", "comment": "", "price": 0.80, "quantity": 1, "tax": 10, "totalHT": 0.80 },
+  ];
+  produitsBuffet = [
+    { "name": "Salade composée", "comment": "", "price": 30.00, "quantity": 1, "tax": 10, "totalHT": 30.00 },
+    { "name": "Plateau de fromage", "comment": "", "price": 2.70, "quantity": 1, "tax": 10, "totalHT": 2.70 },
+    { "name": "Plateau de charcuterie", "comment": "", "price": 2.50, "quantity": 1, "tax": 10, "totalHT": 2.50 },
+    { "name": "Corbeille de fruits", "comment": "", "price": 2.50, "quantity": 1, "tax": 10, "totalHT": 2.50 },
+    { "name": "Mini wrap", "comment": "", "price": 0.57, "quantity": 1, "tax": 10, "totalHT": 0.57 },
+    { "name": "Mini sandwich", "comment": "", "price": 1.00, "quantity": 1, "tax": 10, "totalHT": 1.00 },
+    { "name": "Petit four sucré", "comment": "", "price": 0.77, "quantity": 1, "tax": 10, "totalHT": 0.77 },
+    { "name": "Petit four salé", "comment": "", "price": 0.77, "quantity": 1, "tax": 10, "totalHT": 0.77 },
+    { "name": "Pain et beurre", "comment": "", "price": 0.60, "quantity": 1, "tax": 10, "totalHT": 0.60 },
+    { "name": "Mini beignet", "comment": "", "price": 0.36, "quantity": 1, "tax": 10, "totalHT": 0.36 },
+    { "name": "Macaron", "comment": "", "price": 0.80, "quantity": 1, "tax": 10, "totalHT": 0.80 },
+    { "name": "Mini cannelés", "comment": "", "price": 0.34, "quantity": 1, "tax": 10, "totalHT": 0.34 },
+    { "name": "Gros cannelés", "comment": "", "price": 1.00, "quantity": 1, "tax": 10, "totalHT": 1.00 },
+    { "name": "Mini clafoutis", "comment": "", "price": 0.97, "quantity": 1, "tax": 10, "totalHT": 0.97 },
+    { "name": "Bouchon châtaigne", "comment": "", "price": 0.54, "quantity": 1, "tax": 10, "totalHT": 0.54 },
+    { "name": "Mini muffin", "comment": "", "price": 0.80, "quantity": 1, "tax": 10, "totalHT": 0.80 },
+  ];
+  produitsPersonnel = [
+    { "name": "Personnel", "comment": "", "price": 14.00, "quantity": 1, "tax": 10, "totalHT": 14.00 },
+    { "name": "Kit couverts", "comment": "", "price": 0.18, "quantity": 1, "tax": 10, "totalHT": 0.18 },
+    { "name": "Gobelets, serviettes, etc", "comment": "", "price": 7.00, "quantity": 1, "tax": 10, "totalHT": 7.00 },
   ];
 
   public static selectedProducts: any;
@@ -65,13 +152,12 @@ export class AppComponent {
     AppComponent.selectedProductsTax = AppComponent.selectedProducts.tax;
     AppComponent.selectedProductsTotalHT = AppComponent.selectedProducts.totalHT.toFixed(2);
     (<HTMLTableCellElement>document.getElementById("totalHT")).innerHTML = AppComponent.selectedProducts.totalHT.toFixed(2) + " €";
-    (<HTMLDivElement>document.getElementById("selection")).hidden = false;
+    // (<HTMLDivElement>document.getElementById("selection")).hidden = false;
     (<HTMLTableElement>document.getElementById("selectionTable")).hidden = false;
-    (<HTMLTableElement>document.getElementById("totalTable")).hidden = false;
+    // (<HTMLTableElement>document.getElementById("totalTable")).hidden = false;
 
-    AppComponent.productsList.push({ name: AppComponent.selectedProductsName, comment: "", price: AppComponent.selectedProductsPrice, quantity: 1, tax: AppComponent.selectedProductsTax, totalHT: 0 })
-
-    // console.log(AppComponent.productsList)
+    AppComponent.productsList.push({ name: AppComponent.selectedProductsName, comment: AppComponent.selectedProductsComment, price: AppComponent.selectedProductsPrice, quantity: AppComponent.selectedProductsQuantity, tax: AppComponent.selectedProductsTax, totalHT: AppComponent.selectedProductsTotalHT });
+    // console.log(AppComponent.productsList);
 
     let table = (<HTMLTableElement>document.getElementById("selectionTable"));
     table.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
@@ -91,7 +177,7 @@ export class AppComponent {
     cell2.appendChild(element1);
     cell2.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
     element1.addEventListener("change", function onCommentChange() {
-      // console.log(element1.value)
+      // console.log(element1.value);
       AppComponent.productsList[(row.rowIndex) - 2].comment = element1.value
     })
 
@@ -102,27 +188,31 @@ export class AppComponent {
     let cell4 = row.insertCell(3);
     let element2 = document.createElement("input");
     element2.type = "number";
+    // AppComponent.productsList[(row.rowIndex) - 2].quantity = 1;
     element2.setAttribute("ng-model", "qte");
     element2.addEventListener("change", function onQuantityChange() {
-      // console.log(element2.value)
+      // console.log(element2.value);
       // AppComponent.selectedProductsQuantity = element2.value;
       // console.log(AppComponent.productsList[(row.rowIndex) - 2].name);
       AppComponent.productsList[(row.rowIndex) - 2].quantity = element2.value
       AppComponent.productsList[(row.rowIndex) - 2].totalHT = (AppComponent.productsList[(row.rowIndex) - 2].price * parseInt(element2.value)).toFixed(2);
       cell6.innerHTML = AppComponent.productsList[(row.rowIndex) - 2].totalHT + " €"
       // console.log("Quantité : " + AppComponent.selectedProductsQuantity);
-      console.log(AppComponent.productsList[(row.rowIndex) - 2]);
+      // console.log(AppComponent.productsList[(row.rowIndex) - 2]);
     })
     element2.addEventListener("keypress", (event) => {
       event.preventDefault();
     });
-    element2.addEventListener('keydown', (e) => {
+    element2.addEventListener("keydown", (e) => {
       if (e.keyCode === 8 || e.keyCode === 46) {
         e.preventDefault();
       }
       return false;
     })
-    element2.style.cssText = "width: 70px;";
+    element2.addEventListener("click", () => {
+      element2.blur();
+    })
+    element2.style.cssText = "width: 70px; cursor: not-allowed";
     element2.id = "quantity"
     element2.min = "1"
     element2.setAttribute("oninput", "'this.value = !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : null'");
@@ -140,21 +230,38 @@ export class AppComponent {
     cell6.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
 
     let cell7 = row.insertCell(6);
-    cell7.innerHTML = "";
+    // cell7.innerHTML = "";
     cell7.style.cssText = "border-collapse: collapse; border: 1px solid black; padding: 8px; margin-top: 10px;"
+    let element3 = document.createElement("button")
+    element3.id = "delete"
+    element3.style.cssText = "display: flex; align-items: center; background: none; border: 1px solid lighten(gray, 24%); height: 48px; padding: 0 24px 0 16px; letter-spacing: .25px; border-radius: 24px; cursor: pointer; font-size: 16px; color: red;"
+    let element4 = document.createElement("span")
+    element4.style.cssText = "margin-right: 8px;"
+    let element5 = document.createElement("span")
+    element5.style.cssText = "display: none;"
+    let element6 = document.createElement("span")
+    element6.appendChild(document.createTextNode("Supprimer"));
+    element3.appendChild(element4);
+    element3.appendChild(element5);
+    element3.appendChild(element6);
+    element3.addEventListener("click", function deleteProduct() {
+      // console.log(AppComponent.productsList[(row.rowIndex) - 2]);
+      // delete AppComponent.productsList[(row.rowIndex) - 2];
+      AppComponent.productsList.splice(((row.rowIndex) - 2), 1);
+      table.deleteRow(row.rowIndex);
+      // console.log(AppComponent.productsList);
+      // console.log(rowCount);
+      if (AppComponent.productsList.length == 0) {
+        (<HTMLTableElement>document.getElementById("selectionTable")).hidden = true;
+      }
+      let productSelect = (<HTMLSelectElement>document.getElementById("product"));
+      productSelect.selectedIndex = 0;
+    })
+    cell7.appendChild(element3);
 
     // AppComponent.selectedProductsComment = AppComponent.selectedProducts.comment;
+    // console.log(AppComponent.productsList[(this.onProductsSelected().row) - 2]);
   }
-
-  // public addProducts() {
-  //   // console.log(AppComponent.commentaires)
-  //   this.productsList.forEach((elem, i) => {
-  //     // elem.comment = AppComponent.commentaires[i]
-  //     // elem.quantity = AppComponent.quantites[i]
-  //     // elem.totalHT = AppComponent.totauxHT[i]
-  //   })
-  //   console.log(this.productsList)
-  // }
 
   public downloadInvoice() {
     const date = new Date();
@@ -315,7 +422,12 @@ export class AppComponent {
     let infoTotalTTC = 0;
 
     AppComponent.productsList.forEach((element, index, array) => {
-      info.push([element.name, element.comment, element.price + " €", element.quantity, element.tax + " %", element.totalHT + " €"])
+      if (element.quantity == 1) {
+        element.totalHT = element.price
+        info.push([element.name, element.comment, element.price + " €", element.quantity, element.tax + " %", element.totalHT + " €"])
+      } else {
+        info.push([element.name, element.comment, element.price + " €", element.quantity, element.tax + " %", element.totalHT + " €"])
+      }
       infoTotalHT += parseFloat(element.totalHT);
       if (element.tax == 10) {
         infoTotalTVA10 += (element.totalHT * 0.1)
@@ -499,7 +611,7 @@ export class AppComponent {
     //   theme: 'plain'
     // });
 
-    return doc.save("invoice");
+    return doc.save("Devis du " + currentDate + " pour le client " + name);
   }
 
   public checkPrestation() {
@@ -510,15 +622,16 @@ export class AppComponent {
       message.hidden = false
     } else {
       message.hidden = true
-      this.downloadInvoice()
+      this.checkProducts()
     }
   }
 
   public checkProducts() {
-    let produit = (<HTMLSelectElement>document.getElementById("product")).value;
+    let produitListStatus = (<HTMLTableElement>document.getElementById("selectionTable")).hidden;
     let message2 = (<HTMLSpanElement>document.getElementById("popup2"));
+    // console.log(produitListStatus);
 
-    if (produit === "undefined") {
+    if (produitListStatus === true) {
       message2.hidden = false
     } else {
       message2.hidden = true

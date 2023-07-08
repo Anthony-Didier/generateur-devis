@@ -52,17 +52,93 @@
         [ngModelOptions]="{ standalone: true }"
         (ngModelChange)="onProductsSelected()"
       >
-        <option selected="true" [ngValue]="undefined" disabled="disabled">
-          -- Choisir un produit --
+        <option
+          selected="true"
+          [ngValue]="undefined"
+          disabled="disabled"
+          style="text-align: center"
+        >
+          -------- Choisir un produit --------
         </option>
-        <option *ngFor="let product of products" [ngValue]="product">
+        <!-- <option *ngFor="let product of products" [ngValue]="product">
           {{ product.name + " - " + product.price.toFixed(2) + " €" }}
+        </option> -->
+        <option
+          [ngValue]="undefined"
+          disabled="disabled"
+          style="text-align: center"
+        >
+          Boissons (TVA 10 %)
+        </option>
+        <option *ngFor="let boisson10 of boissons10" [ngValue]="boisson10">
+          {{ boisson10.name + " - " + boisson10.price.toFixed(2) + " €" }}
+        </option>
+        <option
+          [ngValue]="undefined"
+          disabled="disabled"
+          style="text-align: center"
+        >
+          Boissons (TVA 20 %)
+        </option>
+        <option *ngFor="let boisson20 of boissons20" [ngValue]="boisson20">
+          {{ boisson20.name + " - " + boisson20.price.toFixed(2) + " €" }}
+        </option>
+        <option
+          [ngValue]="undefined"
+          disabled="disabled"
+          style="text-align: center"
+        >
+          Buffet
+        </option>
+        <option
+          *ngFor="let produitBuffet of produitsBuffet"
+          [ngValue]="produitBuffet"
+        >
+          {{
+            produitBuffet.name + " - " + produitBuffet.price.toFixed(2) + " €"
+          }}
+        </option>
+        <option
+          [ngValue]="undefined"
+          disabled="disabled"
+          style="text-align: center"
+        >
+          Petit déjeuner
+        </option>
+        <option
+          *ngFor="let produitPetitDejeuner of produitsPetitDejeuner"
+          [ngValue]="produitPetitDejeuner"
+        >
+          {{
+            produitPetitDejeuner.name +
+              " - " +
+              produitPetitDejeuner.price.toFixed(2) +
+              " €"
+          }}
+        </option>
+        <option
+          [ngValue]="undefined"
+          disabled="disabled"
+          style="text-align: center"
+        >
+          Personnel
+        </option>
+        <option
+          *ngFor="let produitPersonnel of produitsPersonnel"
+          [ngValue]="produitPersonnel"
+        >
+          {{
+            produitPersonnel.name +
+              " - " +
+              produitPersonnel.price.toFixed(2) +
+              " €"
+          }}
         </option>
       </select>
     </div>
-    <div class="fields" id="selection" hidden="true">
+    <!-- <div class="fields" id="selection" hidden="true">
       Produits sélectionnés: {{ classReference.selectedProductsName }}
-    </div>
+    </div> -->
     <table id="selectionTable" hidden="true" border="1">
       <tr>
         <th>Désignation</th>
@@ -100,7 +176,7 @@
         <td></td>
       </tr>
     </table>
-    <table id="totalTable" hidden="true">
+    <!-- <table id="totalTable" hidden="true">
       <tr>
         <td style="font-weight: bold">Total HT</td>
         <td></td>
@@ -117,7 +193,7 @@
         <td style="font-weight: bold">Total TTC</td>
         <td style="font-weight: bold"></td>
       </tr>
-    </table>
+    </table> -->
     <div class="fields">
       <label for="name">Nom du client : </label>
       <input type="text" id="name" formControlName="name" />
@@ -137,7 +213,7 @@
   </form>
   <button
     id="download"
-    (click)="downloadInvoice()"
+    (click)="checkPrestation()"
     [disabled]="createForm.invalid || isNextDisabled"
   >
     Télécharger le devis
