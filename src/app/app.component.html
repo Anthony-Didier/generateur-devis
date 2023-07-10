@@ -1,5 +1,29 @@
 <body>
-  <h1>Générateur de devis</h1>
+  <div>
+    <h1 style="display: inline-block">Générateur de devis</h1>
+    <div
+      style="
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 100px;
+        margin-top: 20px;
+      "
+    >
+      <button
+        id="download"
+        (click)="checkPrestationAndProducts()"
+        [disabled]="createForm.invalid || isNextDisabled"
+      >
+        Télécharger le devis
+      </button>
+      <span id="popup" hidden="true" style="margin-left: 20px"
+        >Veuillez sélectionner une prestation</span
+      >
+      <!-- <span id="popup2" hidden="true"
+        >Veuillez sélectionner au moins un produit</span
+      > -->
+    </div>
+  </div>
   <p id="explication">
     Grâce à cet outil, vous pouvez générer un devis au format .pdf et l'envoyer
     directement au client.
@@ -68,6 +92,24 @@
           disabled="disabled"
           style="text-align: center"
         >
+          Petit déjeuner
+        </option>
+        <option
+          *ngFor="let produitPetitDejeuner of produitsPetitDejeuner"
+          [ngValue]="produitPetitDejeuner"
+        >
+          {{
+            produitPetitDejeuner.name +
+              " - " +
+              produitPetitDejeuner.price.toFixed(2) +
+              " €"
+          }}
+        </option>
+        <option
+          [ngValue]="undefined"
+          disabled="disabled"
+          style="text-align: center"
+        >
           Boissons (TVA 10 %)
         </option>
         <option *ngFor="let boisson10 of boissons10" [ngValue]="boisson10">
@@ -96,24 +138,6 @@
         >
           {{
             produitBuffet.name + " - " + produitBuffet.price.toFixed(2) + " €"
-          }}
-        </option>
-        <option
-          [ngValue]="undefined"
-          disabled="disabled"
-          style="text-align: center"
-        >
-          Petit déjeuner
-        </option>
-        <option
-          *ngFor="let produitPetitDejeuner of produitsPetitDejeuner"
-          [ngValue]="produitPetitDejeuner"
-        >
-          {{
-            produitPetitDejeuner.name +
-              " - " +
-              produitPetitDejeuner.price.toFixed(2) +
-              " €"
           }}
         </option>
         <option
@@ -211,18 +235,4 @@
       <input type="email" id="email" />
     </div>
   </form>
-  <button
-    id="download"
-    (click)="checkPrestation()"
-    [disabled]="createForm.invalid || isNextDisabled"
-  >
-    Télécharger le devis
-  </button>
-  <!-- <button id="addProducts" (click)="addProducts()">
-    Vérifier liste produits
-  </button> -->
-  <span id="popup" hidden="true">Veuillez sélectionner une prestation</span>
-  <span id="popup2" hidden="true"
-    >Veuillez sélectionner au moins un produit</span
-  >
 </body>

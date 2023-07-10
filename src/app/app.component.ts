@@ -74,10 +74,10 @@ export class AppComponent {
     { "name": "Oasis (2 l)", "comment": "", "price": 3.50, "quantity": 1, "tax": 10, "totalHT": 3.50 },
     { "name": "Pepsi (1,25 l)", "comment": "", "price": 3.00, "quantity": 1, "tax": 10, "totalHT": 3.00 },
     { "name": "Eau (50 cl)", "comment": "", "price": 0.26, "quantity": 1, "tax": 10, "totalHT": 0.26 },
-    { "name": "Thé", "comment": "", "price": 2.05, "quantity": 1, "tax": 10, "totalHT": 2.05 },
   ];
   produitsPetitDejeuner = [
     { "name": "Café filtre", "comment": "", "price": 3.79, "quantity": 1, "tax": 10, "totalHT": 3.79 },
+    { "name": "Thé", "comment": "", "price": 2.05, "quantity": 1, "tax": 10, "totalHT": 2.05 },
     { "name": "Gâteaux secs", "comment": "", "price": 0.50, "quantity": 1, "tax": 10, "totalHT": 0.50 },
     { "name": "Mini viennoiseries", "comment": "", "price": 1.02, "quantity": 1, "tax": 10, "totalHT": 1.02 },
     { "name": "Madeleines", "comment": "", "price": 0.80, "quantity": 1, "tax": 10, "totalHT": 0.80 },
@@ -614,28 +614,37 @@ export class AppComponent {
     return doc.save("Devis du " + currentDate + " pour le client " + name);
   }
 
-  public checkPrestation() {
+  public checkPrestationAndProducts() {
     let prestation = (<HTMLSelectElement>document.getElementById("prestation")).value;
+    let produitListStatus = (<HTMLTableElement>document.getElementById("selectionTable")).hidden;
     let message = (<HTMLSpanElement>document.getElementById("popup"));
 
     if (prestation === "none") {
       message.hidden = false
+      message.innerHTML = "Veuillez sélectionner une prestation"
     } else {
       message.hidden = true
-      this.checkProducts()
+
+      if (produitListStatus === true) {
+        message.hidden = false
+        message.innerHTML = "Veuillez sélectionner au moins un produit"
+      } else {
+        message.hidden = true
+        this.downloadInvoice()
+      }
     }
   }
 
-  public checkProducts() {
-    let produitListStatus = (<HTMLTableElement>document.getElementById("selectionTable")).hidden;
-    let message2 = (<HTMLSpanElement>document.getElementById("popup2"));
-    // console.log(produitListStatus);
+  // public checkProducts() {
+  //   let produitListStatus = (<HTMLTableElement>document.getElementById("selectionTable")).hidden;
+  //   let message2 = (<HTMLSpanElement>document.getElementById("popup2"));
+  //   // console.log(produitListStatus);
 
-    if (produitListStatus === true) {
-      message2.hidden = false
-    } else {
-      message2.hidden = true
-      this.downloadInvoice()
-    }
-  }
+  //   if (produitListStatus === true) {
+  //     message2.hidden = false
+  //   } else {
+  //     message2.hidden = true
+  //     this.downloadInvoice()
+  //   }
+  // }
 }
