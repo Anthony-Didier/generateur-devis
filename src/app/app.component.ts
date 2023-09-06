@@ -133,7 +133,7 @@ export class AppComponent {
       time: ['', Validators.required],
       name: ['', Validators.required],
       service: ['', Validators.required],
-      po: ['', Validators.required],
+      // po: ['', Validators.required],
     })
 
     this.createForm.valueChanges.subscribe((v) => {
